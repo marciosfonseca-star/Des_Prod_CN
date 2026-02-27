@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Cadastro de Desenvolvimento</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Sistema de Cadastro de Desenvolvimento</h1>
+
+      <section id="auth-card" class="card">
+        <h2>Acesso ao Sistema</h2>
+
+        <div class="auth-tabs">
+          <button type="button" class="tab-btn active" data-tab="login">Entrar</button>
+          <button type="button" class="tab-btn" data-tab="register">Criar usuário</button>
+          <button type="button" class="tab-btn" data-tab="recover">Recuperar acesso</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <label>
+            ID de usuário
+            <input id="login-user-id" type="text" required />
+          </label>
+          <label>
+            Senha
+            <input id="login-password" type="password" required />
+          </label>
+          <button type="submit">Entrar</button>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden>
+          <label>
+            ID de usuário
+            <input id="register-user-id" type="text" required maxlength="30" />
+          </label>
+          <label>
+            Nome completo
+            <input id="register-full-name" type="text" required maxlength="120" />
+          </label>
+          <label>
+            Empresa
+            <input id="register-company" type="text" required maxlength="100" />
+          </label>
+          <label>
+            Senha
+            <input id="register-password" type="password" required />
+            <small>Mínimo 8 caracteres, com ao menos 1 maiúscula, 1 número, 1 letra e 1 caractere especial.</small>
+          </label>
+          <button type="submit">Cadastrar usuário</button>
+        </form>
+
+        <form id="recover-form" class="auth-form" hidden>
+          <label>
+            ID de usuário
+            <input id="recover-user-id" type="text" required />
+          </label>
+          <label>
+            Nome completo
+            <input id="recover-full-name" type="text" required />
+          </label>
+          <label>
+            Nova senha
+            <input id="recover-new-password" type="password" required />
+          </label>
+          <button type="submit">Atualizar senha</button>
+        </form>
+
+        <p id="auth-message" class="message"></p>
+      </section>
+
+      <section id="app-shell" hidden>
+        <section class="card">
+          <div class="top-bar">
+            <div>
+              <h2 id="form-title">Novo Produto</h2>
+              <p id="session-info" class="session-info"></p>
+            </div>
+            <button type="button" id="logout-btn" class="secondary">Sair</button>
+          </div>
+
+          <form id="product-form">
+            <div class="grid">
+              <label>
+                Código
+                <input id="code" type="text" readonly />
+              </label>
+
+              <label>
+                NCM
+                <input id="ncm" type="text" required maxlength="12" />
+              </label>
+
+              <label class="full-width">
+                Descrição do Produto
+                <input id="description" type="text" required maxlength="160" />
+              </label>
+
+              <label>
+                Target
+                <input id="target" type="text" required maxlength="80" />
+              </label>
+
+              <label>
+                Cliente
+                <input id="client" type="text" required maxlength="100" />
+              </label>
+
+              <label>
+                Preço Desenvolvido (R$)
+                <input id="price" type="number" min="0" step="0.01" required />
+              </label>
+
+              <label class="full-width">
+                Imagens do Produto (até 3)
+                <input id="images" type="file" accept="image/*" multiple />
+                <small>Ao editar, selecione novas imagens apenas se quiser substituir as atuais.</small>
+              </label>
+            </div>
+
+            <div id="image-preview" class="preview"></div>
+
+            <div class="actions">
+              <button type="submit" id="save-btn">Salvar</button>
+              <button type="button" id="cancel-btn" class="secondary" hidden>Cancelar edição</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="list-header">
+            <h2>Produtos Cadastrados</h2>
+            <div class="header-actions">
+              <input id="search" type="search" placeholder="Buscar por código, descrição, NCM, target ou cliente" />
+              <select id="export-client"></select>
+              <button type="button" id="export-xml-btn">Exportar XML</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Descrição</th>
+                  <th>NCM</th>
+                  <th>Target</th>
+                  <th>Cliente</th>
+                  <th>Preço (R$)</th>
+                  <th>Imagens</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="products-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
